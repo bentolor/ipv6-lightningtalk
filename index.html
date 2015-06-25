@@ -1,0 +1,580 @@
+<!doctype html>
+<html lang="de">
+
+	<head>
+		<meta charset="utf-8">
+
+		<title>IPv6 - Ein Crashcurs</title>
+
+		<meta name="description" content="Ein Crashkurs in IPv6">
+		<meta name="author" content="Benjamin Schmid">
+
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, minimal-ui">
+
+		<link rel="stylesheet" href="css/reveal.css">
+		<link rel="stylesheet" href="css/theme/black.css" id="theme">
+
+		<!-- Code syntax highlighting -->
+		<link rel="stylesheet" href="lib/css/zenburn.css">
+
+		<!-- Custom, overriding CSS -->
+		<link rel="stylesheet" href="css/custom.css">
+
+		<!-- Printing and PDF exports -->
+		<script>
+			var link = document.createElement( 'link' );
+			link.rel = 'stylesheet';
+			link.type = 'text/css';
+			link.href = window.location.search.match( /print-pdf/gi ) ? 'css/print/pdf.css' : 'css/print/paper.css';
+			document.getElementsByTagName( 'head' )[0].appendChild( link );
+		</script>
+
+		<!--[if lt IE 9]>
+		<script src="lib/js/html5shiv.js"></script>
+		<![endif]-->
+	</head>
+
+	<body>
+
+		<div class="reveal">
+
+			<!-- Any section element inside of this container is displayed as a slide -->
+			<div class="slides">
+
+				<section>
+					<h1 style="margin: 10px">IPv6</h1>
+					<h3>Ein Crash-Kurs</h3>
+
+					<!-- Profil-Karten -->
+					<div class="container">
+					    <div class="profile">
+								<div class="profile-sidebar">
+									<div class="profile-userpic">
+										<img data-src="img/BenjaminSchmid.jpg" class="img-responsive" alt="">
+									</div>
+									<div class="profile-usertitle">
+										<div class="profile-usertitle-name">
+											Benjamin Schmid
+										</div>
+										<div class="profile-usertitle-job">
+											Technology Advisor
+										</div>
+									</div>
+							</div>
+							<div class="profile-content">
+				   				<a href="http://twitter.com/bentolor">@bentolor</a>
+	            			</div>
+						</div>
+					</div>
+
+					<div id="helpfooter">
+					<code>?</code> für Hilfe, <code>S</code> für Folien-Notizen
+					</div>
+					<div id="version">
+					26. Juni 2015
+					</div>
+					<div id="licence">
+						<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+							<img alt="Creative Commons Lizenzvertrag"
+								 src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>
+						<br /><span xmlns:dct="http://purl.org/dc/terms/"
+									href="http://purl.org/dc/dcmitype/InteractiveResource"
+									property="dct:title" rel="dct:type">IPv6 - Ein Crash-Kurs</span> von
+								<a xmlns:cc="http://creativecommons.org/ns#" href="http://twitter.com/bentolor"
+									property="cc:attributionName" rel="cc:attributionURL">Benjamin Schmid</a>
+									ist lizenziert unter einer
+									<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
+										Creative Commons Namensnennung - Nicht-kommerziell -
+										Weitergabe unter gleichen Bedingungen 4.0 International Lizenz</a>.
+							Beruht <a xmlns:dct="http://purl.org/dc/terms/"
+									  href="http://lab.hakim.se/reveal-js/" rel="dct:source">Reveal.JS</a>.
+					</div>
+
+					<aside class="notes" data-markdown>
+					    Längst ist der bisherige IPv4-Pool erschöpft, und die Zeiten in denen
+						eine Internetadresse sich mit einfachen 192.168.144.42 ausdrücken
+						lassen, gezählt. Dieser Talk will einen einführenden Einblick in
+						die neue Internet-Adressierung geben, aktuelle Flaschenhälse und
+						Probleme ansprechen (Dual-Stack, DS-Lite, ...) und aufzeigen was
+						uns in naher Zukunft erwarten wird.
+					</aside>
+				</section>
+
+				<section>
+
+					<section>
+						<h1>IPv4</h1>
+					</section>
+
+					<section>
+						<div data-markdown class="container">
+							## IPv4 in a Nutshell
+							`192.168.144.177`
+							- 4 Bytes
+							- Punktnotation
+							- 2<sup>³²</sup> = 4.294.967.296 IPs
+						</div>
+					</section>
+
+					<section>
+						<h2>IPv4 Netze</h2>
+
+						<div class="container">
+							<div data-markdown>
+								IP:    `192.168.144.177`    <!---->
+
+								Netz-Maske: `255.255.255.0`        <!---->
+								Subnet:  `192.168.144.0`..`254`   <!-- -->
+							</div>
+							<div data-markdown class="fragment">
+								##### Routing über
+								- _Routing Tabellen_
+								- _BGP_
+
+
+							</div>
+						</div>
+
+					</section>
+
+					<section>
+						<h3>Internet-Zugang</h3>
+
+						<div class="container" data-markdown>
+							In der Regel erteilt der ISP jedem Anschluss eine IPv4 Adresse.    <!-- -->
+							Diese erhält in der Regel der Router.
+
+							Jedes Gerät im LAN benötigt jedoch eine eigene IP-Adresse.
+						</div>
+					</section>
+
+					<section>
+						<h3>Network Adress Translation (NAT)</h3>
+
+						<div class="container">
+							<div data-markdown>
+							##### LAN zu Internet (NAT)
+							| LAN | WAN |
+							|-----|-----|
+							|192.168.0.**2:4701**|205.0.0.2:**6787**|
+							|192.168.0.**3:5387**|205.0.0.2:**8709**|
+							|192.168.0.**4:1001**|205.0.0.2:**4806**|
+							</div>
+
+							<div data-markdown class="fragment">
+							##### Internet zu LAN (Port mapping)
+							| LAN | WAN |
+							|-----|-----|
+							|205.0.0.2:**8888**|192.168.0.**4:8080**|
+							</div>
+						</div>
+					</section>
+
+					<section>
+
+						<img style="width: 500px"
+							 src="https://upload.wikimedia.org/wikipedia/commons/thumb/9/95/Regional_Internet_Registries_world_map.svg/640px-Regional_Internet_Registries_world_map.svg.png"
+							 alt="Regional Internet Registries World Map"/>
+						<img style="background: rgba(255,255,255,.7); width: 600px"
+							 src="https://upload.wikimedia.org/wikipedia/commons/5/52/Huston_rir_ipv4_exhaustion_projection.png"
+							 alt="Anzahl verfügbarer IPv4-Adressblöcke zwischen 1995 und heute"/>
+						<div class="fragment">
+							Folge-Probleme: Fragmentierung<span class="fragment">, IP-Handel</span>
+						</div>
+
+						<aside class="notes" data-markdown>
+						     - Microsoft: 666,624 IPv4 für 7.5M$
+						</aside>
+					</section>
+
+
+
+				</section>
+
+				<section>
+
+					<section>
+						<h1>IPv6</h1>
+						<h3 class="fragment">... Standard seit 1998 = 17 Jahren!</h3>
+					</section>
+
+					<section>
+						<div class="container">
+							<div data-markdown >
+								## IPv6 - Die Vorteile
+								- **IP-Adressen unlimited**
+								- Kein NAT; **echtes Ende-zu-Ende**
+								- Subnetze "eingebaut" & günstig
+								- Wesentlich einfacherer Paketaufbau
+							</div>
+						</div>
+					</section>
+
+					<section>
+						<h2>IPv6 Adressraum</h2>
+						<p>
+							16 Bytes = 2 <sup>128</sup>
+						</p>
+						<p class="fragment">
+							  340.282.366.920.938.000.000.000.000.000.000.000.000 Knoten
+							<br><span class="fragment decent">340 Sextillionen</span>
+						</p>
+					</section>
+
+				</section>
+				<section>
+
+					<section>
+						<div class="container">
+							<h2>IPv6 Adressierungsformat</h2>
+
+							<code>2001:085b:1f1f:0000:0000:0000:00a9:1234</code>
+							<div>⇓</div>
+							<div data-markdown>
+							- 8 Gruppen von 4-stelliger Hex-Zahlen
+							- Getrennt durch `:`
+							</div>
+							<div data-markdown class="fragment">
+							- Ausgelassen werden können
+								- Führende Nullen
+								- Zusammenhängende Gruppe von 0000 durch `::`
+							</div>
+							<div class="fragment">
+								<div>⇓</div>
+								<code>2001:85b:1f1f::a9:1234</code>
+							</div>
+						</div>
+					</section>
+
+					<section>
+						<div data-markdown >
+							## IPv6 Hierarchie & Subnetze
+							CIDR-Notation: `2001:0db8:1234::/48`
+						</div>
+<div style="font-size:1em;  width: 600px; margin-left: 300px; margin-top: 50px;"><pre>
+    2607:f238:0000:0000:0000:0000:0000:0000
+	|    |    |    |    |    |    |
+	|    |    |    |    |    |    +– /112
+	|    |    |    |    |    |
+	|    |    |    |    |    +– /96
+	|    |    |    |    |
+	|    |    |    |    +– /80
+	|    |    |    |
+	|    |    |    +– /64
+	|    |    |
+	|    |    +– /48
+	|    |
+	|    +– /32
+	|
+	+– /16
+</pre></div>
+					</section>
+
+
+					<section>
+						 <h2>IPv6 Unicast Adressen</h2>
+						<tt style="color: #000;"><span style="background-color: #FFA0A0">2001:0db8:85a3:</span><span style="background-color: #A0FFA0">1319:</span><span style="background-color: #FFFFA0">8a2e:0370:7347</span></tt>/64
+
+						<p><span style="background-color: #FFA0A0;color: #000;">Routing Präfix</span> <span class="decent">(48 oder mehr)</span></p>
+						<p><span style="background-color: #A0FFA0;color: #000;">Subnetz</span> <span class="decent">(16 oder weniger)</span> </p>
+						<p><span style="background-color: #FFFFA0;color: #000;">Interface-Identifier</span> <span class="decent">(</span>mindestens <span class="decent">64; erlaubt damit <em>Stateless autoconfiguration</em>)</span> </p>
+					</section>
+
+					<section>
+						<h2>IPv6 Adressen</h2>
+						<div class="container">
+							<p>Mehre IPv6 pro Interface!<p>
+
+							<div class="fragment">
+								<h5>Klassen</h5>
+								<ul>
+									<li>Unicast <span class="decent">Eindeutiges Ziel</span></li>
+									<li>Anycast <span class="decent">Eines von mehren Zielen</span></li>
+									<li>Multicast <span class="decent">Viele Ziele</span></li>
+								</ul>
+							</div>
+
+							<div class="fragment">
+								<h5>Scopes</h5>
+								<ul>
+									<li>Global <span class="decent">Weltweit routbar</span></li>
+									<li>Link-local <span class="decent">Nur im LAN/WLAN/...</span></li>
+									<li> <span class="decent">weitere...</span></li>
+								</ul>
+							</div>
+
+						</div>
+					</section>
+
+					<section>
+						<div data-markdown>
+							## Besondere IPv6 Adressen
+
+							| Adresse | |
+							|---------|-|
+							| `::/128` | Ungültig |
+							| `::1/128` | Loopback |
+							| `FE80::/10` | Link-local |
+							| `FF00::/8` | Multicast |
+							| `0100::/64` | quasi: `/dev/null` |
+						</div>
+					</section>
+
+
+					<section>
+						<div class="container">
+							<h2>IPv6 Features</h2>
+							<ul>
+								<li class="fragment" >Autokonfiguration <span class="decent">(IP selber generieren)</span></li>
+								<li class="fragment">Adress Duplikat-Erkennung<span class="decent"></span></li>
+								<li class="fragment">Multihoming <span class="decent">(IP an mehren Standorten)</span></li>
+								<li class="fragment">Mobile IP <span class="decent">(IP an wechselnde Standorten)</span></li>
+							</ul>
+						</div>
+					</section>
+
+				</section>
+
+				<section>
+					<div class="container">
+						<h2>Tipps</h2>
+						<h5>URL-Notation</h5>
+
+						<a href="https://[2001:db8:85a3::7344]:8080/">
+							https://[<i>2001:db8:85a3::7344</i>]:8080/
+						</a>
+
+						<div class="fragment">
+							<h5>Namen nachschlagen</h5>
+							<p style="width: 800px">
+								<pre><code>nslookup -query=aaaa www.google.com
+dig www.google.com AAAA</code></pre>
+
+							</p>
+						</div>
+
+						<div class="fragment">
+							<h5>Link-locale Adressen</h5>
+							<p>
+								<code>fe80::7686:7aff:fe71:1e25b<span class="emphasize">%eth0</span></code>
+							</p>
+						</div>
+
+					</div>
+				</section>
+
+
+				<section>
+
+					<section>
+						<h1>IPv6 Deployment</h1>
+					</section>
+
+					<section>
+						<h2>Übergangsmechanismen</h2>
+
+						<p>
+							<b>Dual-Stack:</b> <span class="decent">IPv4 und IPv6 gleichzeitig</span>
+						</p>
+						<p>
+							<b>DS-Lite:</b> <span class="decent"> IPv4 NAT beim ISP. <br>Euphemismus: <i>Carrier-grade NAT</i></span>
+						</p>
+						<p>
+							<b>Tunnelmechanismen:</b> <br> <span class="decent">6in4, 6to4, 6over4, ISATAP, Teredo, NAT64, ...</span>
+						</p>
+					</section>
+
+					<section>
+						<div class="container">
+							<h2>Verbreitung</h2>
+
+							<ul>
+								<li>Weltweit: ~6 %</li>
+								<li>Deutschland: ~15 %</li>
+							</ul>
+
+							<h5>Endkunden in D</h5>
+							<p style="">
+								Wenige: Nur die müssen wie z.B. <i>Unity</i> (DS-lite),
+								<br>oder <i>1&amp;1</i> und <i>Telekom</i> (Dual-Stack)
+							</p>
+						</div>
+					</section>
+
+				</section>
+
+
+				<section>
+					<h2>IPv6 Fazit</h2>
+					<div style="width: 80%; margin: 0 auto" class="fragment">
+						<div data-markdown class="twocol">
+							##### Down sides
+							- Komplett neues Protokoll
+							- Zögerliche Einführung
+							- daher Übergang = _»PITA«_
+							- E2E ➟ Privacy issues
+						</div>
+						<div data-markdown class="twocol fragment">
+							##### Up sides
+							- _Alternativlos!_
+							- Echtes Ende-zu-Ende
+							- Einfacher & Effizienter
+							- Simplere Konfiguration
+						</div>
+					</div>
+				</section>
+
+
+
+			</div>
+		</div>
+
+		<script src="lib/js/head.min.js"></script>
+		<script src="js/reveal.js"></script>
+
+		<script>
+
+			// Full list of configuration options available at:
+			// https://github.com/hakimel/reveal.js#configuration
+			Reveal.initialize({
+				// Display controls in the bottom right corner
+			    controls: false,
+
+			    // Display a presentation progress bar
+			    progress: true,
+
+			    // Display the page number of the current slide
+			    slideNumber: false,
+
+			    // Push each slide change to the browser history
+			    history: true,
+
+			    // Enable keyboard shortcuts for navigation
+			    keyboard: true,
+
+			    // Enable the slide overview mode
+			    overview: true,
+
+			    // Vertical centering of slides
+			    center: true,
+
+			    // Enables touch navigation on devices with touch input
+			    touch: true,
+
+			    // Loop the presentation
+			    loop: false,
+
+			    // Change the presentation direction to be RTL
+			    rtl: false,
+
+			    // Turns fragments on and off globally
+			    fragments: true,
+
+			    // Flags if the presentation is running in an embedded mode,
+			    // i.e. contained within a limited portion of the screen
+			    embedded: false,
+
+			    // Flags if we should show a help overlay when the questionmark
+			    // key is pressed
+			    help: true,
+
+			    // Number of milliseconds between automatically proceeding to the
+			    // next slide, disabled when set to 0, this value can be overwritten
+			    // by using a data-autoslide attribute on your slides
+			    autoSlide: 0,
+
+			    // Stop auto-sliding after user input
+			    autoSlideStoppable: true,
+
+			    // Enable slide navigation via mouse wheel
+			    mouseWheel: true,
+
+			    // Hides the address bar on mobile devices
+			    hideAddressBar: true,
+
+			    // Opens links in an iframe preview overlay
+			    previewLinks: true,
+
+			    // Transition style
+			    transition: 'slide', // none/fade/slide/convex/concave/zoom
+
+			    // Transition speed
+			    transitionSpeed: 'default', // default/fast/slow
+
+			    // Transition style for full page slide backgrounds
+			    backgroundTransition: 'default', // none/fade/slide/convex/concave/zoom
+
+			    // Number of slides away from the current that are visible
+			    viewDistance: 3,
+
+			    // Parallax background image
+			    parallaxBackgroundImage: 'http://www.freeimages.com/pic/l/t/te/teslacoils/1432294_60521919.jpg', // e.g. "'https://s3.amazonaws.com/hakim-static/reveal-js/reveal-parallax-1.jpg'"
+
+			    // Parallax background size
+			    parallaxBackgroundSize: '3936px 2624px', // CSS syntax, e.g. "2100px 900px"
+
+			    // Amount to move parallax background (horizontal and vertical) on slide change
+			    // Number, e.g. 100
+			    parallaxBackgroundHorizontal: '',
+			    parallaxBackgroundVertical: '',
+
+				// The "normal" size of the presentation, aspect ratio will be preserved
+			    // when the presentation is scaled to fit different resolutions. Can be
+			    // specified using percentage units.
+			    width: 1280,
+			    height: 720,
+
+			    // Factor of the display size that should remain empty around the content
+			    margin: 0.05,
+
+			    // Bounds for smallest/largest possible scale to apply to content
+			    minScale: 0.2,
+			    maxScale: 1.5,
+
+				// Ctrl + Mouse-Click ==> Zoom in
+				zoomKey: 'ctrl',
+
+				// Optional reveal.js plugins
+				dependencies: [
+					{ src: 'lib/js/classList.js', condition: function() { return !document.body.classList; } },
+					{ src: 'plugin/markdown/marked.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/markdown/markdown.js', condition: function() { return !!document.querySelector( '[data-markdown]' ); } },
+					{ src: 'plugin/highlight/highlight.js', async: true, condition: function() { return !!document.querySelector( 'pre code' ); }, callback: function() { hljs.initHighlightingOnLoad(); } },
+					{ src: 'plugin/zoom-js/zoom.js', async: true },
+					{ src: 'plugin/notes/notes.js', async: true }
+				]
+			});
+
+		</script>
+
+
+		<script src="js/zepto.min.js"></script>
+		<script>
+		    Zepto(function ($) {
+
+		        var tableOfContents = $('#table-of-contents');
+		        var tableList = $('<ol />')
+
+		        $('.toc-element').each(function (index) {
+		            var _self = $(this),
+		                    hash = '#/' + _self.closest('section').index();
+
+		            if (_self.text()) tableList.append([
+		                '<li>',
+		                    //    '<a href="' + hash + '">',
+		                _self.text(),
+		                	//'</a>',
+		                '</li>'
+		            ].join(''));
+
+		        });
+
+		        tableOfContents.html(tableList);
+		    });
+		</script>
+
+	</body>
+</html>
