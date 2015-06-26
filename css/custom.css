@@ -98,6 +98,14 @@
   border: none;
   box-shadow: none; }
 
+/* Plain Images ohne Buzz */
+.reveal img.flag {
+  margin: 0;
+  background: none;
+  border: none;
+  box-shadow: none;
+  height: 0.8em;}
+
 /* Left-Floating Icon. */
 .reveal img.floaticon {
     max-width: 120px;

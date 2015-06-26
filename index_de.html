@@ -4,9 +4,9 @@
 	<head>
 		<meta charset="utf-8">
 
-		<title>A quick crash course into IPv6</title>
+		<title>IPv6 - Ein Crashcurs</title>
 
-		<meta name="description" content="A quick crash course into IPv6">
+		<meta name="description" content="Ein Crashkurs in IPv6">
 		<meta name="author" content="Benjamin Schmid">
 
 		<meta name="apple-mobile-web-app-capable" content="yes" />
@@ -46,7 +46,7 @@
 
 				<section>
 					<h1 style="margin: 10px">IPv6</h1>
-					<h3>A quick crash course</h3>
+					<h3>Ein Crash-Kurs</h3>
 
 					<!-- Profil-Karten -->
 					<div class="container">
@@ -71,10 +71,10 @@
 					</div>
 
 					<div id="helpfooter">
-					<code>?</code> for help
+					<code>?</code> für Hilfe, <code>S</code> für Folien-Notizen
 					</div>
 					<div id="version">
-					2015-06-26
+					26. Juni 2015
 					</div>
 					<div id="licence">
 						<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
@@ -82,24 +82,24 @@
 								 src="https://i.creativecommons.org/l/by-nc-sa/4.0/80x15.png" /></a>
 						<br /><span xmlns:dct="http://purl.org/dc/terms/"
 									href="http://purl.org/dc/dcmitype/InteractiveResource"
-									property="dct:title" rel="dct:type">IPv6 - a crash course</span>
-									by
+									property="dct:title" rel="dct:type">IPv6 - Ein Crash-Kurs</span> von
 								<a xmlns:cc="http://creativecommons.org/ns#" href="http://twitter.com/bentolor"
 									property="cc:attributionName" rel="cc:attributionURL">Benjamin Schmid</a>
-									is licensed under a
+									ist lizenziert unter einer
 									<a rel="license" href="http://creativecommons.org/licenses/by-nc-sa/4.0/">
-										Creative Commons Attribution-NonCommercial-ShareAlike 4.0 International License.</a>.
-							<br> Based in parts on the work of <a xmlns:dct="http://purl.org/dc/terms/"
+										Creative Commons Namensnennung - Nicht-kommerziell -
+										Weitergabe unter gleichen Bedingungen 4.0 International Lizenz</a>.
+							<br> Beruht in Teilen auf <a xmlns:dct="http://purl.org/dc/terms/"
 									  href="http://lab.hakim.se/reveal-js/" rel="dct:source">Reveal.JS</a>.
 					</div>
 
 					<div class="emphasize" style="font-size: 0.8em">
-						<a href="index_de.html"><img class="flag" src="https://upload.wikimedia.org/wikipedia/en/thumb/b/ba/Flag_of_Germany.svg/320px-Flag_of_Germany.svg.png"
-						alt="German flag" /> Auf Deutsch ansehen</a> <span class="decent">(German version)</span>
+						<a href="index.html"><img class="flag" src="https://upload.wikimedia.org/wikipedia/en/thumb/a/a4/Flag_of_the_United_States.svg/320px-Flag_of_the_United_States.svg.png"
+						alt="US flag" /> Switch to english version</a>
 					</div>
 
 					<div style="font-size: 0.8em; margin: 60px;">
-						<span class="decent">Navigation hint: use mouse wheel or <code>space-bar</code></span>
+						<span class="decent">Navigation: Mausrad oder <code>Leertaste</code></span>
 					</div>
 				</section>
 
@@ -114,45 +114,41 @@
 							## IPv4 in a Nutshell
 							`192.168.144.177`
 							- 4 Bytes
-							- Dot-notation
+							- Punktnotation
 							- 2<sup>³²</sup> = 4.294.967.296 IPs
 						</div>
 					</section>
 
 					<section>
-						<h2>IPv4 Networks</h2>
+						<h2>IPv4 Netze</h2>
 
 						<div class="container">
 							<div data-markdown>
 								IP:    `192.168.144.177`    <!---->
 
-								Network mask: `255.255.255.0`        <!---->
+								Netz-Maske: `255.255.255.0`        <!---->
 											⇓   <!---->
 								Subnet:  `192.168.144.0`..`254`   <!-- -->
 							</div>
 							<div data-markdown class="fragment">
-								##### Routing via
-								- _Routing tables_
+								##### Routing über
+								- _Routing Tabellen_
 								- _BGP_
+
+
 							</div>
 						</div>
 
 					</section>
 
 					<section>
-						<h3>Internet access</h3>
+						<h3>Internet-Zugang</h3>
 
-						<div class="container" >
-							<p>
-								Generally <abbr title="Internet Service Providers">ISP</abbr>s
-								assign only one IPv4 address per endpoint.  <br>
-								Typically your router owns this world-wide unique IP address.
-							</p>
+						<div class="container" data-markdown>
+							In der Regel erteilt der ISP jedem Anschluss eine IPv4 Adresse.    <!-- -->
+							Diese erhält in der Regel der Router.
 
-							<p>
-								But every devices in you local network needs its own IP. <br>
-								How does this work?
-							</p>
+							Jedes Gerät im LAN benötigt jedoch eine eigene IP-Adresse.
 						</div>
 					</section>
 
@@ -161,7 +157,7 @@
 
 						<div class="container">
 							<div data-markdown>
-							##### Local to internet _(NAT)_
+							##### LAN zu Internet _(NAT)_
 							| LAN | |WAN |
 							|-----|-|----|
 							|192.168.0.**2:4701**| ⇒  |205.0.0.2:**6787**|
@@ -170,12 +166,13 @@
 							</div>
 
 							<div data-markdown class="fragment">
-							##### Internet to local _(Port mapping, UPnP)_
+							##### Internet zu LAN _(Port mapping, UPnP)_
 							| LAN | | WAN |
 							|-----|-|----|
 							|205.0.0.2:**8888**| ⇐ |192.168.0.**4:8080**|
 							</div>
 						</div>
+
 					</section>
 
 					<section>
@@ -187,7 +184,7 @@
 							 src="https://upload.wikimedia.org/wikipedia/commons/5/52/Huston_rir_ipv4_exhaustion_projection.png"
 							 alt="Anzahl verfügbarer IPv4-Adressblöcke zwischen 1995 und heute"/>
 						<div class="fragment">
-							Consequences: Fragmentation<span class="fragment">, IP trading</span>
+							Folge-Probleme: Fragmentierung<span class="fragment">, IP-Handel</span>
 						</div>
 
 						<aside class="notes" data-markdown>
@@ -203,29 +200,29 @@
 
 					<section>
 						<h1>IPv6</h1>
-						<h3 class="fragment">... standard since 1998 = 17 years!</h3>
+						<h3 class="fragment">... Standard seit 1998 = 17 Jahren!</h3>
 					</section>
 
 					<section>
 						<div class="container">
 							<div data-markdown >
-								## IPv6 - Benefits
-								- Virtual **unlimited IP adresses**
-								- No NAT; **real end-to-end**
-								- Subnets "built-in" & cheap
-								- Simpler packet header
+								## IPv6 - Die Vorteile
+								- **IP-Adressen unlimited**
+								- Kein NAT; **echtes Ende-zu-Ende**
+								- Subnetze "eingebaut" & günstig
+								- Wesentlich einfacherer Paketaufbau
 							</div>
 						</div>
 					</section>
 
 					<section>
-						<h2>IPv6 adress space</h2>
+						<h2>IPv6 Adressraum</h2>
 						<p>
 							16 Bytes = 2 <sup>128</sup>
 						</p>
 						<p class="fragment">
-							  340.282.366.920.938.000.000.000.000.000.000.000.000 nodes
-							<br><span class="fragment decent">read as: '340 sextillions'</span>
+							  340.282.366.920.938.000.000.000.000.000.000.000.000 Knoten
+							<br><span class="fragment decent">340 Sextillionen</span>
 						</p>
 					</section>
 
@@ -234,18 +231,18 @@
 
 					<section>
 						<div class="container">
-							<h2>IPv6 address representation</h2>
+							<h2>IPv6 Adressierungsformat</h2>
 
 							<code>2001:085b:1f1f:0000:0000:0000:00a9:1234</code>
 							<div>⇓</div>
 							<div data-markdown>
-							- 8 groups of 4-digit hex-values
-							- Separated by `:`
+							- 8 Gruppen von 4-stelliger Hex-Zahlen
+							- Getrennt durch `:`
 							</div>
 							<div data-markdown class="fragment">
-							- You can ommit
-								- Leading zeros
-								- one contiguous groups of 0000 via `::`
+							- Ausgelassen werden können
+								- Führende Nullen
+								- Zusammenhängende Gruppe von 0000 durch `::`
 							</div>
 							<div class="fragment">
 								<div>⇓</div>
@@ -256,10 +253,10 @@
 
 					<section>
 						<div data-markdown >
-							## IPv6 hierarchy & subnets
-							CIDR notation: `2001:0db8:1234::/48`
+							## IPv6 Hierarchie & Subnetze
+							CIDR-Notation: `2001:0db8:1234::/48`
 						</div>
-<div style="font-size:1em; width: 600px; margin-left: 300px; margin-top: 50px;"><pre>
+<div style="font-size:1em;  width: 600px; margin-left: 300px; margin-top: 50px;"><pre>
     2607:f238:0000:0000:0000:0000:0000:0000
 	|    |    |    |    |    |    |
 	|    |    |    |    |    |    +– /112
@@ -280,34 +277,34 @@
 
 
 					<section>
-						 <h2>IPv6 unicast address</h2>
+						 <h2>IPv6 Unicast Adressen</h2>
 						<tt style="color: #000;"><span style="background-color: #FFA0A0">2001:0db8:85a3:</span><span style="background-color: #A0FFA0">1319:</span><span style="background-color: #FFFFA0">8a2e:0370:7347</span></tt>/64
 
-						<p><span style="background-color: #FFA0A0;color: #000;">Routing prefix</span> <span class="decent">(/48 or more; ISP typically /32)</span></p>
-						<p><span style="background-color: #A0FFA0;color: #000;">Subnet</span> <span class="decent">(/16 or less)</span> </p>
-						<p><span style="background-color: #FFFFA0;color: #000;">Interface-identifier</span> <span class="decent">(</span>at least <span class="decent">/64; <br> this allows <em>Stateless autoconfiguration</em>)</span> </p>
+						<p><span style="background-color: #FFA0A0;color: #000;">Routing Präfix</span> <span class="decent">(48 oder mehr; ISP ~ 32)</span></p>
+						<p><span style="background-color: #A0FFA0;color: #000;">Subnetz</span> <span class="decent">(16 oder weniger)</span> </p>
+						<p><span style="background-color: #FFFFA0;color: #000;">Interface-Identifier</span> <span class="decent">(</span>mindestens <span class="decent">64; erlaubt damit <em>Stateless autoconfiguration</em>)</span> </p>
 					</section>
 
 					<section>
-						<h2>IPv6 addresses</h2>
+						<h2>IPv6 Adressen</h2>
 						<div class="container">
-							<p>Multiple IPs per device!<p>
+							<p>Mehre IPs pro Netzwerkschnittstelle!<p>
 
 							<div class="fragment">
-								<h5>Address classes</h5>
+								<h5>Klassen</h5>
 								<ul>
-									<li>Unicast <span class="decent">One target</span></li>
-									<li>Anycast <span class="decent">One out of multiple targets</span></li>
-									<li>Multicast <span class="decent">Multiple targets</span></li>
+									<li>Unicast <span class="decent">Eindeutiges Ziel</span></li>
+									<li>Anycast <span class="decent">Eines von mehren Zielen</span></li>
+									<li>Multicast <span class="decent">Viele Ziele</span></li>
 								</ul>
 							</div>
 
 							<div class="fragment">
 								<h5>Scopes</h5>
 								<ul>
-									<li>Global <span class="decent">Routed world-wide </span></li>
-									<li>Link-local <span class="decent">Only valid in your LAN/WLAN/...</span></li>
-									<li> <span class="decent">more...</span></li>
+									<li>Global <span class="decent">Weltweit routbar</span></li>
+									<li>Link-local <span class="decent">Nur im LAN/WLAN/...</span></li>
+									<li> <span class="decent">weitere...</span></li>
 								</ul>
 							</div>
 
@@ -316,15 +313,15 @@
 
 					<section>
 						<div data-markdown>
-							## Special addresses
+							## Besondere IPv6 Adressen
 
-							| Address | |
+							| Adresse | |
 							|---------|-|
-							| `::/128` | Invalid IP |
-							| `::1/128` | Loopback device |
+							| `::/128` | Ungültig |
+							| `::1/128` | Loopback |
 							| `FE80::/10` | Link-local |
 							| `FF00::/8` | Multicast |
-							| `0100::/64` | Virtual: `/dev/null` |
+							| `0100::/64` | quasi: `/dev/null` |
 						</div>
 					</section>
 
@@ -333,10 +330,10 @@
 						<div class="container">
 							<h2>IPv6 Features</h2>
 							<ul>
-								<li class="fragment" >Address autoconfiguration <span class="decent">(independently IP assignment)</span></li>
-								<li class="fragment">Duplicate address detection<span class="decent"></span></li>
-								<li class="fragment">Mobile IP <span class="decent">(roaming IPs)</span></li>
-								<li class="fragment">Multihoming <span class="decent">(One IP at multiple providers)</span></li>
+								<li class="fragment" >Autokonfiguration <span class="decent">(IP selber generieren)</span></li>
+								<li class="fragment">Adress Duplikat-Erkennung<span class="decent"></span></li>
+								<li class="fragment">Multihoming <span class="decent">(IP an mehren Standorten)</span></li>
+								<li class="fragment">Mobile IP <span class="decent">(IP an wechselnde Standorten)</span></li>
 							</ul>
 						</div>
 					</section>
@@ -345,15 +342,15 @@
 
 				<section>
 					<div class="container">
-						<h2>Usage hints</h2>
-						<h5>URL notation</h5>
+						<h2>Tipps</h2>
+						<h5>URL-Notation</h5>
 
 						<a href="https://[2001:db8:85a3::7344]:8080/">
 							https://[<i>2001:db8:85a3::7344</i>]:8080/
 						</a>
 
 						<div class="fragment">
-							<h5>Lookup IPs</h5>
+							<h5>Namen nachschlagen</h5>
 							<p style="width: 800px">
 								<pre><code>nslookup -query=aaaa www.google.com
 dig www.google.com AAAA</code></pre>
@@ -362,7 +359,7 @@ dig www.google.com AAAA</code></pre>
 						</div>
 
 						<div class="fragment">
-							<h5>Refering link-local IPs</h5>
+							<h5>Link-locale Adressen</h5>
 							<p>
 								<code>fe80::7686:7aff:fe71:1e25b<span class="emphasize">%eth0</span></code>
 							</p>
@@ -379,35 +376,35 @@ dig www.google.com AAAA</code></pre>
 					</section>
 
 					<section>
-						<h2>IPv6 transition mechanism</h2>
+						<h2>Übergangsmechanismen</h2>
 
 						<p>
-							<b>Dual-Stack:</b> <span class="decent">IPv4 and IPv6 at the same time</span>
+							<b>Dual-Stack:</b> <span class="decent">IPv4 und IPv6 gleichzeitig</span>
 						</p>
 						<p>
-							<b>DS-Lite:</b> <span class="decent"> IPv4 NAT done by ISP. <br>Euphemism: <i>carrier-grade NAT</i></span>
+							<b>DS-Lite:</b> <span class="decent"> IPv4 NAT beim ISP. <br>Euphemismus: <i>Carrier-grade NAT</i></span>
 						</p>
 						<p>
-							<b>Tunneling mechanism (6⇆6):</b> <br> <span class="decent">6in4, 6to4, 6over4, ISATAP, Teredo, ...</span>
+							<b>Tunnelmechanismen (6⇆6):</b> <br> <span class="decent">6in4, 6to4, 6over4, ISATAP, Teredo, ...</span>
 						</p>
 						<p>
-							<b>Translation mechanism (6⇆4):</b> <span class="decent">NAT64</span>
+							<b>Übersetzungsverfahren (6⇆4):</b> <span class="decent">NAT64</span>
 						</p>
 					</section>
 
 					<section>
 						<div class="container">
-							<h2>Deployment status</h2>
+							<h2>Verbreitung</h2>
 
 							<ul>
-								<li>World-wide: ~6 %</li>
-								<li>Germany: ~15 %</li>
+								<li>Weltweit: ~6 %</li>
+								<li>Deutschland: ~15 %</li>
 							</ul>
 
-							<h5>End-Customers in germany</h5>
+							<h5>Endkunden in D</h5>
 							<p style="">
-								Sparse: Cable Providers<br> with small IPv4 pools like <i>Unity</i> (DS-lite),
-								<br>or big players like <i>1&amp;1</i> and <i>Telekom</i> (Dual-Stack)
+								Wenige: Nur die müssen wie z.B. <i>Unity</i> (DS-lite),
+								<br>oder <i>1&amp;1</i> und <i>Telekom</i> (Dual-Stack)
 							</p>
 						</div>
 					</section>
@@ -416,22 +413,21 @@ dig www.google.com AAAA</code></pre>
 
 
 				<section>
-					<h2>IPv6 conclusion</h2>
+					<h2>IPv6 Fazit</h2>
 					<div style="width: 80%; margin: 0 auto" class="fragment">
 						<div data-markdown class="twocol">
 							##### Down sides
-							- New, incompatible protocol
-							- Reluctant deployment
-							- therefore transition   <!-- -->
-							  = _»PITA«_
-							- E2E ➟ privacy issues
+							- Komplett neues Protokoll
+							- Zögerliche Einführung
+							- daher Übergang = _»PITA«_
+							- E2E ➟ Privacy issues
 						</div>
 						<div data-markdown class="twocol fragment">
 							##### Up sides
-							- _The one & only option!_
-							- Real end-to-end
-							- Simpler & more efficient
-							- easier configuration
+							- _Alternativlos!_
+							- Echtes Ende-zu-Ende
+							- Einfacher & Effizienter
+							- Simplere Konfiguration
 						</div>
 					</div>
 				</section>
