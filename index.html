@@ -127,6 +127,7 @@
 								IP:    `192.168.144.177`    <!---->
 
 								Netz-Maske: `255.255.255.0`        <!---->
+											⇓   <!---->
 								Subnet:  `192.168.144.0`..`254`   <!-- -->
 							</div>
 							<div data-markdown class="fragment">
@@ -156,7 +157,7 @@
 
 						<div class="container">
 							<div data-markdown>
-							##### LAN zu Internet (NAT)
+							##### LAN zu Internet _(NAT)_
 							| LAN | WAN |
 							|-----|-----|
 							|192.168.0.**2:4701**|205.0.0.2:**6787**|
@@ -165,7 +166,7 @@
 							</div>
 
 							<div data-markdown class="fragment">
-							##### Internet zu LAN (Port mapping)
+							##### Internet zu LAN _(Port mapping, UPnP)_
 							| LAN | WAN |
 							|-----|-----|
 							|205.0.0.2:**8888**|192.168.0.**4:8080**|
@@ -278,7 +279,7 @@
 						 <h2>IPv6 Unicast Adressen</h2>
 						<tt style="color: #000;"><span style="background-color: #FFA0A0">2001:0db8:85a3:</span><span style="background-color: #A0FFA0">1319:</span><span style="background-color: #FFFFA0">8a2e:0370:7347</span></tt>/64
 
-						<p><span style="background-color: #FFA0A0;color: #000;">Routing Präfix</span> <span class="decent">(48 oder mehr)</span></p>
+						<p><span style="background-color: #FFA0A0;color: #000;">Routing Präfix</span> <span class="decent">(48 oder mehr; ISP ~ 32)</span></p>
 						<p><span style="background-color: #A0FFA0;color: #000;">Subnetz</span> <span class="decent">(16 oder weniger)</span> </p>
 						<p><span style="background-color: #FFFFA0;color: #000;">Interface-Identifier</span> <span class="decent">(</span>mindestens <span class="decent">64; erlaubt damit <em>Stateless autoconfiguration</em>)</span> </p>
 					</section>
@@ -286,7 +287,7 @@
 					<section>
 						<h2>IPv6 Adressen</h2>
 						<div class="container">
-							<p>Mehre IPv6 pro Interface!<p>
+							<p>Mehre IPs pro Netzwerkschnittstelle!<p>
 
 							<div class="fragment">
 								<h5>Klassen</h5>
@@ -383,7 +384,10 @@ dig www.google.com AAAA</code></pre>
 							<b>DS-Lite:</b> <span class="decent"> IPv4 NAT beim ISP. <br>Euphemismus: <i>Carrier-grade NAT</i></span>
 						</p>
 						<p>
-							<b>Tunnelmechanismen:</b> <br> <span class="decent">6in4, 6to4, 6over4, ISATAP, Teredo, NAT64, ...</span>
+							<b>Tunnelmechanismen (6⇆6):</b> <br> <span class="decent">6in4, 6to4, 6over4, ISATAP, Teredo, ...</span>
+						</p>
+						<p>
+							<b>Übersetzungsverfahren (6⇆4):</b> <span class="decent">NAT64</span>
 						</p>
 					</section>
 
